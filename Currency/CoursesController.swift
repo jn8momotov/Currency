@@ -15,6 +15,7 @@ class CoursesController: UITableViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("startLoadXML"), object: nil, queue: nil) { (notification) in
             DispatchQueue.main.async {
                 let activityIndicator = UIActivityIndicatorView(style: .gray)
+                activityIndicator.color = UIColor.white
                 activityIndicator.startAnimating()
                 self.navigationItem.rightBarButtonItem?.customView = activityIndicator
             }
@@ -24,6 +25,7 @@ class CoursesController: UITableViewController {
                 self.tableView.reloadData()
                 self.navigationItem.title = Model.shared.currentDate
                 let barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.refresh, target: nil, action: #selector(self.refreshCoursesBarButtonPressed(_:)))
+                barButtonItem.tintColor = UIColor.white
                 self.navigationItem.rightBarButtonItem = barButtonItem
             }
         }
@@ -38,6 +40,7 @@ class CoursesController: UITableViewController {
                 self.navigationItem.rightBarButtonItem = barButtonItem
             }
         }
+        navigationItem.titleView?.tintColor = UIColor.white
         navigationItem.title = Model.shared.currentDate
     }
     
@@ -50,17 +53,19 @@ class CoursesController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Model.shared.currencies.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCoursesCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCoursesCell", for: indexPath) as! CourseCell
         let course = Model.shared.currencies[indexPath.row]
-        cell.textLabel?.text = course.name
-        cell.detailTextLabel?.text = course.value
+        cell.initCoursesCell(with: course)
         return cell
     }
 

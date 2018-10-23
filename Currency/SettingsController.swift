@@ -11,6 +11,12 @@ import UIKit
 class SettingsController: UIViewController {
 
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var showNewCoursesButton: UIButton! {
+        didSet {
+            showNewCoursesButton.layer.cornerRadius = 5
+            showNewCoursesButton.clipsToBounds = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -57,21 +57,16 @@ class Model: NSObject, XMLParserDelegate {
                 let urlForSave = URL(fileURLWithPath: path)
                 do {
                     try data?.write(to: urlForSave)
-                    print("Данные загружены!")
-                    print(path)
                     self.parseXMLFile()
                 }
                 catch {
-                    print("Error: \(error.localizedDescription)")
                     errorGlobal = error.localizedDescription
                 }
             }
             else {
-                print("Error: \(error!.localizedDescription)")
                 errorGlobal = error?.localizedDescription
             }
         }
-        NotificationCenter.default.post(name: NSNotification.Name.init("startLoadXML"), object: self)
         if let errorGlobal = errorGlobal {
             NotificationCenter.default.post(name: NSNotification.Name("errorLoadingXML"), object: self, userInfo: ["error" : errorGlobal])
         }
@@ -80,11 +75,11 @@ class Model: NSObject, XMLParserDelegate {
     
     // Парсим XML файл
     func parseXMLFile() {
+        NotificationCenter.default.post(name: NSNotification.Name.init("startLoadXML"), object: self)
         currencies = [Currency.ruble()]
         let parser = XMLParser(contentsOf: urlForXML)
         parser?.delegate = self
         parser?.parse()
-        print("Данные обновлены!")
         NotificationCenter.default.post(name: .init("dataUpdate"), object: self)
         for currency in currencies {
             if currency.charCode == fromCurrency.charCode {

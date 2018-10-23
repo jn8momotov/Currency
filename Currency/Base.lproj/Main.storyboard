@@ -17,6 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="IvZ-j7-8dP" kind="relationship" relationship="viewControllers" id="Rni-qD-v2w"/>
@@ -27,7 +29,7 @@
             </objects>
             <point key="canvasLocation" x="-260" y="-22"/>
         </scene>
-        <!--Settings Controller-->
+        <!--Выберите дату-->
         <scene sceneID="FBr-Jv-Zev">
             <objects>
                 <viewController id="aaW-qu-3yj" customClass="SettingsController" customModule="Currency" customModuleProvider="target" sceneMemberID="viewController">
@@ -45,7 +47,11 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frU-hr-f20">
                                 <rect key="frame" x="16" y="261" width="343" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Показать курс"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <state key="normal" title="Показать курс">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="showNewCoursesButtonPressed:" destination="aaW-qu-3yj" eventType="touchUpInside" id="ww4-TS-L17"/>
                                 </connections>
@@ -54,8 +60,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ACV-Us-NnF"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DMd-2A-JnY">
+                    <navigationItem key="navigationItem" title="Выберите дату" id="DMd-2A-JnY">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UI0-pZ-G45">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="cancelBarButtonPressed:" destination="aaW-qu-3yj" id="vlT-bo-W0v"/>
                             </connections>
@@ -63,6 +70,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="KQ5-Td-boN" id="oeF-Ps-tsM"/>
+                        <outlet property="showNewCoursesButton" destination="frU-hr-f20" id="id0-km-K0X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AmF-39-RTU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,29 +86,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="idCoursesCell" textLabel="lJ4-OP-4JQ" detailTextLabel="CUB-lB-dA2" style="IBUITableViewCellStyleValue1" id="XYl-tJ-3Nw">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="idCoursesCell" rowHeight="60" id="XYl-tJ-3Nw" customClass="CourseCell" customModule="Currency" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XYl-tJ-3Nw" id="ZTu-8p-3as">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lJ4-OP-4JQ">
-                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iH-LM-0Y6">
+                                            <rect key="frame" x="96" y="19" width="175" height="21"/>
+                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CUB-lB-dA2">
-                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNI-GX-koK">
+                                            <rect key="frame" x="279" y="19" width="80" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="mwO-6p-Wqb"/>
+                                                <constraint firstAttribute="height" constant="21" id="wYy-sb-HvP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ToT-ss-Zb0">
+                                            <rect key="frame" x="16" y="14" width="60" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="o5c-iJ-Ynv"/>
+                                                <constraint firstAttribute="width" constant="60" id="zCP-Hw-Y7U"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="kNI-GX-koK" firstAttribute="top" secondItem="ZTu-8p-3as" secondAttribute="topMargin" constant="8" id="9uf-bd-2Cy"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9iH-LM-0Y6" secondAttribute="bottom" constant="9" id="B5Q-tx-vRv"/>
+                                        <constraint firstItem="9iH-LM-0Y6" firstAttribute="leading" secondItem="ToT-ss-Zb0" secondAttribute="trailing" constant="20" id="OW9-qj-Uqc"/>
+                                        <constraint firstItem="ToT-ss-Zb0" firstAttribute="leading" secondItem="ZTu-8p-3as" secondAttribute="leadingMargin" id="R42-I6-wm7"/>
+                                        <constraint firstItem="ToT-ss-Zb0" firstAttribute="top" secondItem="ZTu-8p-3as" secondAttribute="topMargin" constant="3" id="Swh-E9-CMM"/>
+                                        <constraint firstItem="kNI-GX-koK" firstAttribute="trailing" secondItem="ZTu-8p-3as" secondAttribute="trailingMargin" id="cgt-ZS-PXZ"/>
+                                        <constraint firstItem="kNI-GX-koK" firstAttribute="leading" secondItem="9iH-LM-0Y6" secondAttribute="trailing" constant="8" id="pyJ-tu-93E"/>
+                                        <constraint firstItem="9iH-LM-0Y6" firstAttribute="top" secondItem="ZTu-8p-3as" secondAttribute="topMargin" constant="8" id="rIO-nM-T3a"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageFlag" destination="ToT-ss-Zb0" id="IsQ-Y4-jsF"/>
+                                    <outlet property="nameLabel" destination="9iH-LM-0Y6" id="LCi-Ci-2UT"/>
+                                    <outlet property="valueLabel" destination="kNI-GX-koK" id="x1b-Bg-pWr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -110,11 +142,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Gyd-Y0-T3X">
                         <barButtonItem key="leftBarButtonItem" title="Настройки" id="Dku-If-TRa">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="IQ1-v4-K9U" kind="presentation" id="CLq-UY-f2c"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="vqA-Ra-kx0">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="refreshCoursesBarButtonPressed:" destination="QCZ-Cs-qeS" id="Htv-0m-BUC"/>
                             </connections>
@@ -134,14 +168,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Курс за" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhr-aE-Gcx">
-                                <rect key="frame" x="16" y="80" width="343" height="32"/>
+                                <rect key="frame" x="16" y="80" width="343" height="20.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="=" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMh-G9-4sZ">
-                                <rect key="frame" x="176" y="174" width="23" height="30"/>
+                                <rect key="frame" x="176" y="176" width="23" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="textColor"/>
@@ -150,8 +184,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXK-Nn-Qp3">
                                 <rect key="frame" x="55" y="133" width="97" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="RUR"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="28"/>
+                                <state key="normal" title="RUR">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="fromCurrencyButtonPressed:" destination="eZQ-d5-fws" eventType="touchUpInside" id="pVs-VJ-32J"/>
                                 </connections>
@@ -159,8 +195,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nX-8Q-1VW">
                                 <rect key="frame" x="223" y="133" width="97" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="RUR"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="28"/>
+                                <state key="normal" title="RUR">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="toCurrencyButtonPressed:" destination="eZQ-d5-fws" eventType="touchUpInside" id="TOO-BI-QOw"/>
                                 </connections>
@@ -175,6 +213,10 @@
                                     <action selector="fromTextFieldEditingChanged:" destination="eZQ-d5-fws" eventType="editingChanged" id="XdW-C2-Jgs"/>
                                 </connections>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="4IA-hI-Fa4">
+                                <rect key="frame" x="170" y="131" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOa-8h-Wtu">
                                 <rect key="frame" x="223" y="176" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -214,13 +256,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCourse" id="nWK-8c-XMi">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCourse" rowHeight="60" id="nWK-8c-XMi" customClass="CourseCell" customModule="Currency" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nWK-8c-XMi" id="HVh-I0-LOq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNq-F7-SeI">
+                                            <rect key="frame" x="16" y="14" width="60" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-N5-d9E">
+                                            <rect key="frame" x="96" y="19" width="263" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageFlag" destination="tNq-F7-SeI" id="UYM-Dc-5Dv"/>
+                                    <outlet property="nameLabel" destination="rBw-N5-d9E" id="DeU-ca-H2x"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -230,6 +289,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Выберите курс" id="WxY-rl-NiC">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="RUX-jU-lQF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="cancelBarButtonPressed:" destination="Ymc-EC-n8A" id="meY-Dh-DhI"/>
                             </connections>
@@ -238,7 +298,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QHx-sQ-jJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2647" y="1185"/>
+            <point key="canvasLocation" x="2645.5999999999999" y="1184.257871064468"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mqq-x3-wX4">
@@ -247,6 +307,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6xc-ap-uWZ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Ymc-EC-n8A" kind="relationship" relationship="rootViewController" id="XPI-UB-hHk"/>
@@ -256,15 +320,19 @@
             </objects>
             <point key="canvasLocation" x="1700" y="1185"/>
         </scene>
-        <!--Item-->
+        <!--Курсы-->
         <scene sceneID="8be-we-WPq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IvZ-j7-8dP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="K9e-am-Z6v"/>
+                    <tabBarItem key="tabBarItem" title="Курсы" image="courses" id="K9e-am-Z6v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="So4-C0-Tf5">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -275,15 +343,19 @@
             </objects>
             <point key="canvasLocation" x="741.60000000000002" y="-331.48425787106447"/>
         </scene>
-        <!--Item-->
+        <!--Конвертер-->
         <scene sceneID="pos-L8-EH3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2qq-bz-Dy8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fTP-Cc-Glc"/>
+                    <tabBarItem key="tabBarItem" title="Конвертер" image="converter" id="fTP-Cc-Glc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3qt-O5-Rvy">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -302,6 +374,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zAq-dl-iLY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -313,4 +389,9 @@
             <point key="canvasLocation" x="1681" y="-1105"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow" width="256" height="256"/>
+        <image name="converter" width="25" height="25"/>
+        <image name="courses" width="25" height="25"/>
+    </resources>
 </document>
